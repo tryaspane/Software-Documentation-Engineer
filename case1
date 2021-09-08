@@ -1,0 +1,37 @@
+User A want to use feature ‘Lupa Password’ in login page. to reset the password, user must enter their
+NIK so the system can send otp code to user’s phone number.
+Please give example of method and response API from the case below.
+
+//halaman input NIK
+curl --location --request POST 'https://example.xyz/api/v.1/forgotPassword' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "NIK":"1010202030304040"
+}'
+Response Status : 200
+Response Body :
+{
+"phonenumber":"081234567890",
+"reff":"AX12d2",
+"timecounter":"30"
+}
+
+//halaman submit OTP
+curl --location --request POST 'http://https://example.xyz/api/v1.0/otpForgotPassword \
+--header 'Content-Type: application/json' \
+--data-raw '{"code":"858248","destination":"08123456789","reference":"AX12d2","status":{"code":"200","message":"OTP_REQUESTED"},"timeCounter":0,"tryCount":2}'
+Response Status : 200
+Response Body :
+{"code":"200 OK","message":"OTP Valid"}
+
+
+//halaman submit Password
+curl --location --request POST 'https://mysql.visiondg.xyz:8765/api/v1.0/pinVerify' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "password": "Password123@", //encrypted password
+  "confirmpassword": "Password123@" //enrypted password
+}'
+Response Status : 200
+Response Body :
+{"code":"200 OK","message":"Password Diterima"}
